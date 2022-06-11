@@ -24,6 +24,7 @@
             <div class="">
                 <label asp-for="IdRegion" class="form-label">Region: </label>
                 <select style="cursor: pointer;" class="form-select" asp-for="IdRegion">
+                    <option></option>
                     @foreach (RegionViewModel item in ViewBag.Regions)
                     {
                         <option value="@item.IdRegion">@item.NameRegion</option>
@@ -34,6 +35,7 @@
             <div class="">
                 <label asp-for="IdPrimaryType" class="form-label">Tipo Primario: </label>
                 <select style="cursor: pointer;" class="form-select" asp-for="IdPrimaryType">
+                    <option></option>
                     @foreach (TypeViewModel item in ViewBag.Types)
                     {
                         if (item.IdType != 1)
@@ -47,13 +49,9 @@
             <div class="">
                 <label asp-for="IdSecondaryType" class="form-label">Tipo Secundario: </label>
                 <select style="cursor: pointer;" class="form-select" asp-for="IdSecondaryType" value="@Model.IdSecondaryType">
-                    <option value="1">None</option>
                     @foreach (TypeViewModel item in ViewBag.Types)
                     {
-                        if (item.IdType != 1)
-                        {
-                            <option value="@item.IdType">@item.NameType</option>
-                        }
+                        <option value="@item.IdType">@item.NameType</option>
                     }
                 </select>
             </div>
