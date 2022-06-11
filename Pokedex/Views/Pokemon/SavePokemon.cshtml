@@ -1,0 +1,67 @@
+﻿@using Application.ViewModels;
+@model Application.ViewModels.SavePokemonViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save Pokemon";
+}
+
+<div class="container-fluid">
+    <div class="row text-center">
+        <h3 class="my-3 fw-bold">@(editMode ? $"Editando el pokemon: {Model.Name}" : "Creando un nuevo pokemon")</h3>
+    </div>
+    <div class="col-4 mx-auto">
+        <form class="d-flex flex-column justify-content-center gap-2" method="post" asp-controller="Pokemon" asp-action=@(editMode ? "UpdatePokemon" : "AddPokemon")>
+            <div class="">
+                <label asp-for="Name" class="form-label">Nombre: </label>
+                <input type="text" asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="">
+                <label asp-for="ImageUrl" class="form-label">ImagenUrl: </label>
+                <input type="text" asp-for="ImageUrl" class="form-control">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="">
+                <label asp-for="IdRegion" class="form-label">Region: </label>
+                <select style="cursor: pointer;" class="form-select" asp-for="IdRegion">
+                    @foreach (RegionViewModel item in ViewBag.Regions)
+                    {
+                        <option value="@item.IdRegion">@item.NameRegion</option>
+                    }
+                </select>
+                <span asp-validation-for="IdRegion" class="text-danger"></span>
+            </div>
+            <div class="">
+                <label asp-for="IdPrimaryType" class="form-label">Tipo Primario: </label>
+                <select style="cursor: pointer;" class="form-select" asp-for="IdPrimaryType">
+                    @foreach (TypeViewModel item in ViewBag.Types)
+                    {
+                        if (item.IdType != 11)
+                        {
+                            <option value="@item.IdType">@item.NameType</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="IdPrimaryType" class="text-danger"></span>
+            </div>
+            <div class="">
+                <label asp-for="IdSecondaryType" class="form-label">Tipo Secundario: </label>
+                <select style="cursor: pointer;" class="form-select" asp-for="IdSecondaryType" value="@Model.IdSecondaryType">
+                    <option value="11">None</option>
+                    @foreach (TypeViewModel item in ViewBag.Types)
+                    {
+                        if (item.IdType != 11)
+                        {
+                            <option value="@item.IdType">@item.NameType</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="d-flex gap-1">
+                <button type="submit" class="btn btn-outline-primary w-100">Guardar</button>
+                <a asp-controller="Pokemon" asp-action="Index" class="btn btn-outline-secondary w-100">Volver atras</a>
+            </div>
+        </form>
+    </div>
+</div>
+

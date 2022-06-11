@@ -1,0 +1,53 @@
+﻿@model List<Application.ViewModels.TypeViewModel>
+@{
+    ViewData["Title"] = "Types";
+}
+
+<div class="row">
+    <div class="col-sm-6 mx-auto d-flex align-items-center justify-content-between my-4">
+        <div class="text-center">
+            <h1 class="display-4">Tipos</h1>
+        </div>
+        <div class="">
+            <a asp-controller="Type" asp-action="AddType" class="btn btn-outline-success">Agregar Tipo</a>
+        </div>
+    </div>
+    <div class="container-fluid d-flex flex-column align-items-center justify-content-center gap-2 mb-3">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2 class="text-center fw-bold">No hay Tipos</h2>
+        }
+        else
+        {
+            foreach (Application.ViewModels.TypeViewModel item in Model)
+            {
+                <ul class="list-group col-sm-6">
+                    @if (item.IdType != 11)
+                    {
+                        <li class="list-group-item" aria-current="true">
+                            <div class="d-flex justify-content-between">
+                                <span class="mx-2">@item.NameType</span>
+                                <div class="d-flex justify-content-between">
+                                    <a asp-controller="Type" asp-action="UpdateType" asp-route-id="@item.IdType" class="btn btn-sm btn-outline-info me-4">Editar</a>
+                                    <a asp-controller="Type" asp-action="Delete" asp-route-id="@item.IdType" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="list-group-item" aria-current="true">
+                            <div class="d-flex justify-content-between">
+                                <span class="mx-2">@item.NameType</span>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-danger">Este tipo no puede ser editado ni eliminado</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
+

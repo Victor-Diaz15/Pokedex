@@ -1,0 +1,46 @@
+﻿@model List<Application.ViewModels.PokemonViewModel>
+@{
+    ViewData["Title"] = "Pokemons";
+}
+
+<div class="row">
+    <div class="d-flex align-items-center justify-content-around my-3">
+        <div class="text-center">
+            <h1 class="display-4">Pokemones</h1>
+        </div>
+        <div class="">
+            <a asp-controller="Pokemon" asp-action="AddPokemon" class="btn w-100 btn-outline-success">Agregar Pokemon</a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around  flex-wrap">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2 class="text-center fw-bold">No hay pokemones</h2>
+        }
+        else
+        {
+            @foreach (Application.ViewModels.PokemonViewModel item in Model)
+            {
+                <div class="card col-4 m-3" style="width: 18rem;">
+                    <img style="height: 260px" src=@item.ImageUrl class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-text text-center pb-3">@item.Name</h3>
+                        <div class="d-flex justify-content-center">
+                            <div class="">
+                                <a asp-controller="Pokemon" asp-action="UpdatePokemon" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info me-4">Editar</a>
+                                <a asp-controller="Pokemon" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </div>
+                        </div>
+                        <div class="card-footer mt-3">
+                            <div class="d-flex flex-column">
+                                <h5>Region: <span class="fw-light">@item.Region</span></h5>
+                                <h6>Tipo Primario: <span class="fw-light">@item.PrimaryType</span></h6>
+                                <h6>Tipo Secundario: <span class="fw-light">@item.SecondaryType</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
