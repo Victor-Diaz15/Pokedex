@@ -36,7 +36,7 @@
                 <select style="cursor: pointer;" class="form-select" asp-for="IdPrimaryType">
                     @foreach (TypeViewModel item in ViewBag.Types)
                     {
-                        if (item.IdType != 11)
+                        if (item.IdType != 1)
                         {
                             <option value="@item.IdType">@item.NameType</option>
                         }
@@ -47,10 +47,10 @@
             <div class="">
                 <label asp-for="IdSecondaryType" class="form-label">Tipo Secundario: </label>
                 <select style="cursor: pointer;" class="form-select" asp-for="IdSecondaryType" value="@Model.IdSecondaryType">
-                    <option value="11">None</option>
+                    <option value="1">None</option>
                     @foreach (TypeViewModel item in ViewBag.Types)
                     {
-                        if (item.IdType != 11)
+                        if (item.IdType != 1)
                         {
                             <option value="@item.IdType">@item.NameType</option>
                         }

@@ -56,7 +56,7 @@ namespace Application.Services
 
             if (!string.IsNullOrWhiteSpace(filters.Name))
             {
-                listViewModel = listViewModel.Where(pokemon => pokemon.Name == filters.Name).ToList();
+                listViewModel = listViewModel.Where(pokemon => pokemon.Name.ToLower() == filters.Name.ToLower()).ToList();
                 return listViewModel;
             }
             if (filters.IdRegion != null)
